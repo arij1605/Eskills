@@ -1,0 +1,9 @@
+Le question de Mm/Mme :{{ question.idUser.nom }}<br>{{ question.contenu }}<br><br>
+<strong></strong>
+<h3>les reponses :</h3><br>
+{% for r in rep %}
+la reponse de Mm/Mme : {{  r.idUser.nom }}<br>
+{{ r.reponse }}<br><br>
+{% endfor %}
+
+

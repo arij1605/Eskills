@@ -1,0 +1,73 @@
+{% extends 'front.html.twig' %}
+
+
+{% block title %}Nos Cours{% endblock %}
+
+{% block body %}
+
+    <div class="section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                            <h1>Nos Cours</h1>
+                        </div>
+                    </div>
+                </div>
+                <input class="form-control" id="myInput" type="text" placeholder="Recherche Cours" aria-label="search" aria-describedby="search">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Id cours</th>
+                                    <th>Nom cours</th>
+                                    <th>Description cours</th>
+                                    <th>Id formation</th>
+                                    <th>cours</th>
+                                    <th>actions</th>
+                                </tr>
+                                </thead>
+                                <tbody id="hi">
+                                {% for cour in cours %}
+                                    <tr>
+                                        <td>{{ cour.idcours }}</td>
+                                        <td>{{ cour.nomcours }}</td>
+                                        <td>{{ cour.descriptioncours }}</td>
+                                        <td>{{ cour.formation }}</td>
+                                        <td><a href="{{ asset('Upload/' ~ cour.cours) }}" class="alert-dark">{{ cour.cours }}</a></td>
+                                        <td>
+                                            <a href="{{ path('cours_show_front', {'idcours': cour.idcours}) }}" class="btn btn-dark">Details</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+                <script>
+                    $(document).ready(function(){
+                        $("#myInput").on("keyup", function() {
+                            var value = $(this).val().toLowerCase();
+                            $("#hi tr").filter(function() {
+                                $(this).toggle($(this).text().toLowerCase().indexOf(value)>-1)
+
+                            });
+                        });
+                    });
+                </script>
+                {{ knp_pagination_render(cours) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

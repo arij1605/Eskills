@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Examen{% endblock %}
+
+{% block body %}
+    <h1>Examen</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdExamen</th>
+                <td>{{ examan.idExamen }}</td>
+            </tr>
+            <tr>
+                <th>Module</th>
+                <td>{{ examan.module }}</td>
+            </tr>
+            <tr>
+                <th>Dateex</th>
+                <td>{{ examan.dateex ? examan.dateex|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Examen</th>
+                <td>{{ examan.examen }}</td>
+            </tr>
+            <tr>
+                <th>Correction</th>
+                <td>{{ examan.correction }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('examen_index') }}">back to list</a>
+
+    <a href="{{ path('examen_edit', {'idExamen': examan.idExamen}) }}">edit</a>
+
+    {{ include('examen/_delete_form.html.twig') }}
+{% endblock %}

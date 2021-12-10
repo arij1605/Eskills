@@ -1,0 +1,67 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Evenement index {% endblock %}
+{% block body %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#rech tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+    <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Lieu</th>
+                    <th>DateDeb</th>
+                    <th>DateFin</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>actions</th>
+                </tr>
+                <tbody id="rech">
+                {% for evenement in evenements %}
+                    <tr>
+                        <td>{{ evenement.titre }}</td>
+                        <td>{{ evenement.lieu }}</td>
+                        <td>{{ evenement.dateDeb ? evenement.dateDeb|date('Y-m-d') : '' }}</td>
+                        <td>{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</td>
+                        <td>{{ evenement.description }}</td>
+                        <td><img src="{{ asset('Upload/evenement/')}}{{ evenement.imageName }}" width="100"  /></td>
+                        <td>
+                            <a href="{{ path('evenement_edit', {'idEvent': evenement.idEvent}) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ path('evenement_delete', {'id': evenement.idEvent}) }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+

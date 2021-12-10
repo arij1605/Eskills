@@ -1,0 +1,36 @@
+{% extends 'front.html.twig' %}
+
+
+{% block title %}Cours{% endblock %}
+
+{% block body %}
+    <div class="heading_main text_align_center">
+        <h1>{{ cour.nomcours }}</h1>
+    </div>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id cours</th>
+            <td>{{ cour.idcours }}</td>
+        </tr>
+        <tr>
+            <th>Nom cours</th>
+            <td>{{ cour.nomcours }}</td>
+        </tr>
+        <tr>
+            <th>Description cours</th>
+            <td>{{ cour.descriptioncours }}</td>
+        </tr>
+        <tr>
+            <th>Id formation</th>
+            <td>{{ cour.formation }}</td>
+        </tr>
+        <tr>
+            <th>cours</th>
+            <td><a href="{{ asset('Upload/' ~ cour.cours) }}" class="alert-dark">{{ cour.cours }}</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('cours_index_front') }}" class="btn btn-dark">Retour</a>
+{% endblock %}

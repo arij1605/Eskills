@@ -1,0 +1,51 @@
+{% extends 'back.html.twig' %}
+
+
+{% block title %}Cours{% endblock %}
+
+{% block body %}
+
+    <div class="section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                            <h1 class="card-title">{{ cour.nomcours }}</h1>
+                        </div>
+                    </div>
+                </div>
+
+
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Idcours</th>
+                        <td>{{ cour.idcours }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nomcours</th>
+                        <td>{{ cour.nomcours }}</td>
+                    </tr>
+                    <tr>
+                        <th>Descriptioncours</th>
+                        <td>{{ cour.descriptioncours }}</td>
+                    </tr>
+                    <tr>
+                        <th>Id formation</th>
+                        <td>{{ cour.formation }}</td>
+                    </tr>
+                    <tr>
+                        <th>cours</th>
+                        <td>{{ cour.cours }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <a href="{{ path('cours_index') }}" class="btn btn-success">Retour</a>
+                <a href="{{ path('cours_edit', {'idcours': cour.idcours}) }}" class="btn btn-success">Modifier</a>
+                {{ include('cours/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

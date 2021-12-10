@@ -1,0 +1,29 @@
+{% extends 'front.html.twig' %}
+
+
+{% block body %}
+
+    <div class="section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                            <h2>Evenements</h2>
+                        </div>
+                    </div>
+                </div>
+                {% for event in evenements %}
+                    <div class="col-md-4">
+                        <div class="full blog_img_popular">
+                            <img class="img-responsive" src="{{ asset('Upload/evenement/')}}{{ event.imageName }}" alt="#" />
+                           <a href="{{ path('evenement_byId', {'id': event.idEvent}) }}"> <h4>{{ event.titre }}</h4> </a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'back.html.twig' %}
+
+
+
+{% block title %}Nos Formations{% endblock %}
+
+{% block body %}
+    <div class="section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                            <h1 class="card-title">Nos Formations</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Idformation</th>
+                                    <th>Titre</th>
+                                    <th>Description</th>
+                                    <th>Niveau</th>
+                                    <th>Prix</th>
+                                    <th>actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for formation in formations %}
+                                    <tr>
+                                        <td>{{ formation.idformation }}</td>
+                                        <td>{{ formation.titre }}</td>
+                                        <td>{{ formation.description }}</td>
+                                        <td>{{ formation.niveau }}</td>
+                                        <td>{{ formation.prix }}</td>
+                                        <td>
+                                            <a href="{{ path('formation_show', {'idformation': formation.idformation}) }}" class="btn btn-success">Details</a>
+                                            <a href="{{ path('formation_edit', {'idformation': formation.idformation}) }}" class="btn btn-success">Modifier</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {{ knp_pagination_render(formations) }}
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ path('formation_new') }}" class="btn btn-dark">Ajouter une formation</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

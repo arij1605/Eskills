@@ -1,0 +1,61 @@
+{% extends 'back.html.twig' %}
+
+
+{% block title %}Nos Cours{% endblock %}
+
+{% block body %}
+
+    <div class="section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                            <h1 class="card-title">Nos Cours</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Idcours</th>
+                                    <th>Nomcours</th>
+                                    <th>Descriptioncours</th>
+                                    <th>Formation</th>
+                                    <th>Cours</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for cour in cours %}
+                                    <tr>
+                                        <td>{{ cour.idcours }}</td>
+                                        <td>{{ cour.nomcours }}</td>
+                                        <td>{{ cour.descriptioncours }}</td>
+                                        <td>{{ cour.formation }}</td>
+                                        <td><a href="{{ asset('Upload/' ~ cour.cours) }}">{{ cour.cours }}</a></td>
+                                        <td>
+                                            <a href="{{ path('cours_show', {'idcours': cour.idcours}) }}" class="btn btn-success">Details</a>
+                                            <a href="{{ path('cours_edit', {'idcours': cour.idcours}) }}" class="btn btn-success">Modifier</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {{ knp_pagination_render(cours) }}
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ path('cours_new') }}" class="btn btn-dark">Ajouter un cours</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

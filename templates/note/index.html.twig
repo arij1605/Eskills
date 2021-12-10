@@ -1,0 +1,35 @@
+{% extends 'FormateurFront.html.twig' %}
+
+{% block title %}Note index{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Examen</th>
+                <th>User</th>
+                <th>Note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for note in notes %}
+            <tr>
+                <td>{{ note.idExamen.module }}</td>
+                <td>{{ note.idUser.nom }}</td>
+                <td>{{ note.note }}</td>
+                <td>
+                    <a href="{{ path('note_delete', {'idNote': note.idNote}) }}" class="btn btn-danger">Delete</a>
+                    <a href="{{ path('note_edit', {'idNote': note.idNote}) }}" class="btn btn-success">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

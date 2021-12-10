@@ -1,0 +1,74 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Add Examen{% endblock %}
+
+{% block body %}
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <div class="card-body">
+
+        {{ form_start(form, {'attr': {'id': 'form'}}) }}
+        <h4 class="card-title">Add Examen</h4>
+        {{ form_start(form, {'attr': {'class': 'forms-sample'}}) }}
+            <div class="form-group">
+                <label for="exampleInputUsername1">Module</label>
+                {{ form_widget(form.module, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.module) }}
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Date d'Examen</label>
+                {{ form_widget(form.dateex, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Examen</label>
+                {{ form_widget(form.fileexamen, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="form-group">
+                <label for="exampleInputConfirmPassword1">Correction</label>
+                {{ form_widget(form.filecorrection, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <input type="submit" value="Enregistrer" class="btn btn-success" formnovalidate />
+
+
+        {{ form_end(form) }}
+
+
+
+        <script>
+            const form= document.getElementById('form');
+            const errorElement= document.getElementById('errorElement');
+            var now = new Date();
+            form.addEventListener('submit',(e)=> {
+                let message = [];
+
+
+
+                const year= document.getElementById('examen_dateex_year').value;
+                const month= document.getElementById('examen_dateex_month').value;
+                const day= document.getElementById('examen_dateex_day').value;
+
+
+                var date= new Date(year,month,day)
+
+
+
+
+                console.log('whyy'+date)
+
+                console.log(date , ' ', now)
+                if((date < now)){
+                    swal("Oops...","Valider votre date ","error" );
+                    message.push('Vérifier Votre date')
+                }
+                console.log(message)
+                if(message.length> 0){
+                    e.preventDefault();
+                    errorElement.innerText = message.join(', ')
+                }
+            })
+        </script>
+
+    </div>
+
+{% endblock %}

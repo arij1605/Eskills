@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{{ asset('register/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{{ asset('register/css/style.css') }}">
+    <style>
+        .div-1 {
+            background-color: #d41313;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main">
+
+    <div class="container">
+            {{ form_start(registrationForm , {'attr': {'class': 'appointment-form'}}) }}
+            <h2>Register</h2>
+                {{ form_widget(registrationForm.email , {'attr': {'placeholder': 'Email'}}) }}
+                {{ form_errors(registrationForm.email) }}
+                {{ form_widget(registrationForm.nom , {'attr': {'placeholder': 'Nom'}}) }}
+                {{ form_errors(registrationForm.nom) }}
+                {{ form_widget(registrationForm.prenom , {'attr': {'placeholder': 'Prenom'}}) }}
+                {{ form_errors(registrationForm.prenom) }}
+                {{ form_widget(registrationForm.plainPassword , {'attr': {'placeholder': 'Password'}}) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+
+
+
+            <div class="form-submit">
+                <input type="submit" value="Enregistrer" class="btn btn-success"  formnovalidate/>
+            </div>
+        {{ form_end(registrationForm) }}
+
+    </div>
+
+</div>
+
+<!-- JS -->
+<script src="{{ asset('register/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('register/js/main.js') }}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+{% extends 'front.html.twig' %}
+
+
+{% block body %}
+
+    <div class="section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                            <h2>Questions</h2>
+                        </div>
+                    </div>
+                </div>
+                {% for question in questions %}
+                    <div class="col-md-4">
+                        <div class="full blog_img_popular">
+                            <img class="img-responsive" src="{{ asset('front/images/p1.png') }}" alt="#" />
+                            <h4>{{ question.contenu }}</h4>
+                        </div>
+                        {% if question.idUser == user %}
+                        <a href="{{ path('question_edit',{'idQuestion': question.idQuestion}) }}" class="btn btn-success">Edit</a>
+                        <a href="{{ path('question_delete', {'id': question.idQuestion}) }}" class="btn btn-danger">Delete</a>
+                        <a href="{{ path('question_show',{'idQuestion':question.idQuestion})}}" class="btn btn-primary">Details</a>
+
+                        {% else %}
+                            <a href="{{ path('question_show',{'idQuestion':question.idQuestion})}}" class="btn btn-primary">Details</a>
+                         {% endif %}
+                            </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

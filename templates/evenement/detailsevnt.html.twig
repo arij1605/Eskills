@@ -1,0 +1,125 @@
+{% extends 'front.html.twig' %}
+
+
+{% block body %}
+    <style>
+        .mystar{
+            font-size: 25px !important;
+            color: #f9d933 !important;
+        }
+    </style>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <div class="section margin-top_50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 layout_padding_2">
+                    <div class="full">
+                        <div class="heading_main text_align_left">
+                            <h2><span>{{ evenement.titre }}</span></h2>
+                        </div>
+                        <div class="full">
+                            <p>
+                                <h3>Lieu:</h3>{{ evenement.lieu }}<br><br>
+                                <h3>Date Debut:</h3> {{ evenement.dateDeb ? evenement.dateDeb|date('Y-m-d') : '' }}<br><br>
+                                <h3>Date fin:</h3> {{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}<br><br>
+                                <h3>Description:</h3> {{ evenement.description }}<br><br>
+
+                               {% if favoris == null %}
+                                   <button id="btnVote" style="cursor:pointer" class="fa fa-star-o mystar"></button><br><br>
+
+                               {% else %}
+
+                               {% endif %}
+
+                                {% if participation == null %}
+
+                                <a href="{{ path('participation_new',{'id': evenement.idEvent}) }}" class="btn btn-success">Participer</a>
+                                {% else %}
+                            <strong><HR></strong>
+
+
+
+                                            <div >
+                                                <h2><span>Commentaires</span></h2><br><br>
+
+                                            </div>
+
+
+                                      {% for c in comments %}
+                                          {% set like = 0 %}
+                                          {% set deslike = 0 %}
+                                          {% for v in vote %}
+                                              {% if v.type == 1 and v.idcomment.id == c.id %}
+                                                  {% set like = like +1  %}
+                                              {% endif %}
+                                              {% if v.type == 2 and v.idcomment.id == c.id %}
+                                                  {% set deslike = deslike+1 %}
+                                              {% endif %}
+                                          {% endfor %}
+
+
+                                        <strong> {{ c.idUser.nom }} :</strong><br>
+                                        <strong> {{ c.commentaire }}</strong><br>
+                                          {% if usercon.id == c.idUser.id %}
+                                          <a href="{{ path('comment_delete', {'id': c.id}) }}" class="btn btn-danger">delete</a>
+                                          <a href="{{ path('commentaire_edit', {'id': c.id,'ide':evenement.idEvent}) }}" class="btn btn-primary">edit</a><br><br>
+                                          {% else %}
+                                        {{ like }}  <a href="{{ path('like_vote',{'id':c.id }) }}" class="reply"><img src="{{ asset('front/like.png')}}" height="20" width="20"  alt=""></a>
+                                          <a href="{{ path('deslike_vote',{'id':c.id})}}" class="reply"><img src="{{ asset('front/deslike.png')}}" height="20" width="20"  alt=""></a>{{ deslike }}<br><br>
+
+                                          {% endif %}
+                                          {% set like = 0 %}
+                                          {% set deslike = 0 %}
+                                    {% endfor %}
+
+
+
+
+                                    {{ form_start(form) }}
+
+                                    <div class="form-group">
+                                        <label for="exampleInputUsername1">Commenter Ici</label>
+                                        {{ form_widget(form.commentaire, { 'attr': {'class': 'form-control'} }) }}
+                                        {{ form_errors(form.commentaire) }}
+                                    </div>
+
+                                    <input type="submit" value="Enregistrer" class="btn btn-success" formnovalidate/><br><br>
+                                    {{ form_end(form) }}
+
+                                <a href="{{ path('participation_delete',{'id': participation.id}) }}" class="btn btn-danger">Quitter</a>
+
+                                {% endif %}
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="full">
+                        <img src="{{ asset('front/images/img2.png') }}" alt="#" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$("#btnVote").click(function () {
+
+    swal("Good job","L'evenement est ajouter avec success","success" );
+    var obj = {
+        "evenement" : {{ evenement.idEvent }}
+            }
+            $.ajax({
+                url: '{{ path('favoris_new') }}',
+                type: 'post',
+                data: JSON.stringify(obj),
+            });
+
+        })
+    </script>{% endblock %}

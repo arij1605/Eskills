@@ -1,0 +1,46 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Reclamtion List  &nbsp;&nbsp;<span class="btn-danger">{{ count }}</span>{% endblock %}
+
+{% block body %}
+
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Sujet</th>
+                        <th>Objet</th>
+                        <th>Daterec</th>
+                        <th>Etat</th>
+                        <th>actions</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    {% for reclamtion in reclamtions %}
+                        {% if reclamtion.etat == 'Traité' %}
+                        {% else %}
+                        <tr>
+                            <td>{{ reclamtion.sujet }}</td>
+                            <td>{{ reclamtion.objet }}</td>
+                            <td>{{ reclamtion.daterec ? reclamtion.daterec|date('Y-m-d') : '' }}</td>
+                            <td>{{ reclamtion.etat }}</td>
+                            <td>
+                                <a href="{{ path('reclamation_accept', {'idrec': reclamtion.idRec}) }}" class="btn btn-danger">Traiter</a>
+                            </td>
+                        </tr>
+                            {% endif %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

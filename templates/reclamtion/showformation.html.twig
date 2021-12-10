@@ -1,0 +1,30 @@
+{% extends 'front.html.twig' %}
+
+
+{% block body %}
+
+    <div class="section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                            <h2>Formations</h2>
+                        </div>
+                    </div>
+                </div>
+                {% for f in formations %}
+                    <div class="col-md-4">
+                        <div class="full blog_img_popular">
+                            <img class="img-responsive" src="{{ asset('front/images/p1.png') }}" alt="#" />
+                            <h4>{{ f.nom }}</h4>
+                        </div>
+                        <a href="{{ path('reclamtion_new', {'id': f.idFormation}) }}" class="btn btn-danger" style="text-align: center !important;">Reclamer</a>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

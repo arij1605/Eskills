@@ -1,0 +1,34 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Formation{% endblock %}
+{% block body %}
+    <div class="heading_main text_align_center">
+        <h1>{{ formation.titre }}</h1>
+    </div>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Idformation</th>
+            <td>{{ formation.idformation }}</td>
+        </tr>
+        <tr>
+            <th>Titre</th>
+            <td>{{ formation.titre }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ formation.description }}</td>
+        </tr>
+        <tr>
+            <th>Niveau</th>
+            <td>{{ formation.niveau }}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ formation.prix }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('formation_index_front') }}" class="btn btn-dark" >Retour</a>
+{% endblock %}

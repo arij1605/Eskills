@@ -1,0 +1,30 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Note index{% endblock %}
+
+{% block body %}
+  <h3>Moyenne : {{ moyenne }}</h3><br><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Examen</th>
+                <th>User</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for note in notes %}
+            <tr>
+                <td>{{ note.idExamen.module }}</td>
+                <td>{{ note.idUser.nom }}</td>
+                <td>{{ note.note }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

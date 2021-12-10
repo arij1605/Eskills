@@ -1,0 +1,52 @@
+{% extends 'front.html.twig' %}
+
+
+{% block body %}
+
+    <div class="section margin-top_50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 layout_padding_2">
+                    <div class="full">
+                        <div class="heading_main text_align_left">
+                            <h2><span>{{ question.contenu }}</span></h2>
+                        </div>
+                        <div class="full">
+                            {% for r in reponse %}
+                            <h3> {{ r.idUser.nom }} :</h3>
+                                  {{ r.reponse }}<br><br><br>
+                                   {% endfor %}
+
+
+
+                     {{ form_start(form, {'attr': {'class': 'forms-sample'}}) }}
+                            <strong><HR></strong>
+                            <h4 class="card-title">Add Reponse</h4>
+
+
+                            <label for="exampleInputUsername1">Contenue: </label>
+                            {{ form_widget(form.reponse, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.reponse) }}<br>
+
+                            <input type="submit" value="Enregistrer" class="btn btn-success" formnovalidate/><br><br><br><br>
+
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                    <a href="{{ path('telecharger_pdf',{'id':question.idQuestion}) }}" class="btn btn-primary">Telecharger Le Questionnaire</a>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="full">
+                        <img src="{{ asset('front/images/img2.png') }}" alt="#" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

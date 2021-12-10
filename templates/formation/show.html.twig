@@ -1,0 +1,48 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Formation{% endblock %}
+
+{% block body %}
+
+    <div class="section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                            <h1>{{ formation.titre }}</h1>
+                        </div>
+                    </div>
+                </div>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Idformation</th>
+                        <td>{{ formation.idformation }}</td>
+                    </tr>
+                    <tr>
+                        <th>Titre</th>
+                        <td>{{ formation.titre }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ formation.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Niveau</th>
+                        <td>{{ formation.niveau }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix</th>
+                        <td>{{ formation.prix }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <a href="{{ path('formation_index') }}" class="btn btn-success">Retour</a>
+                <a href="{{ path('formation_edit', {'idformation': formation.idformation}) }}" class="btn btn-success">Modifier</a>
+                {{ include('formation/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

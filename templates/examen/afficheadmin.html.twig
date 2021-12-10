@@ -1,0 +1,42 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}List Examens{% endblock %}
+
+{% block body %}
+
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Dateex</th>
+                        <th>Examen</th>
+                        <th>Correction</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for examan in examens %}
+                        <tr>
+                            <td>{{ examan.module }}</td>
+                            <td>{{ examan.dateex ? examan.dateex|date('Y-m-d') : '' }}</td>
+                            <td><a href="{{ asset('Upload/' ~ examan.examen) }}">{{ examan.examen }}</a></td>
+                            <td><a href="{{ asset('Upload/' ~ examan.examen) }}">{{ examan.correction }}</a></td>
+                            <td>
+                                <a href="{{ path('examen_accepter', {'idexamen': examan.idExamen}) }}" class="btn btn-success">Accpter</a>
+                                <a href="{{ path('examen_refuser', {'idexamen': examan.idExamen}) }}" class="btn btn-danger">Refuser</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

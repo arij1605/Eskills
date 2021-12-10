@@ -1,0 +1,39 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Edit Evenement{% endblock %}
+
+{% block body %}
+    <div class="card-body">
+
+        <h4 class="card-title">Edit Evenement</h4>
+        {{ form_start(form, {'attr': {'class': 'forms-sample'}}) }}
+        <div class="form-group">
+            <label for="exampleInputUsername1">Titre</label>
+            {{ form_widget(form.titre, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Lieu</label>
+            {{ form_widget(form.lieu, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Date Début</label>
+            {{ form_widget(form.dateDeb, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputConfirmPassword1">Date Fin</label>
+            {{ form_widget(form.dateFin, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputConfirmPassword1">Description</label>
+            {{ form_widget(form.description, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputConfirmPassword1">Image</label>
+            {{ form_widget(form.file, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <input type="submit" value="Enregistrer" class="btn btn-success"/>
+
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

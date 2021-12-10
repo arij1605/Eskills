@@ -1,0 +1,85 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}New Evenement{% endblock %}
+
+{% block body %}
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <div class="card-body">
+        {{ form_start(form, {'attr': {'id': 'form'}}) }}
+
+        <h4 class="card-title">Add Evenement</h4>
+        {{ form_start(form, {'attr': {'class': 'forms-sample'}}) }}
+        <div class="form-group">
+            <label for="exampleInputUsername1">Titre</label>
+            {{ form_widget(form.titre, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.titre) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Lieu</label>
+            {{ form_widget(form.lieu, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.lieu) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Date Début</label>
+            {{ form_widget(form.dateDeb, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputConfirmPassword1">Date Fin</label>
+            {{ form_widget(form.dateFin, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputConfirmPassword1">Description</label>
+            {{ form_widget(form.description, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.description) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputConfirmPassword1">Image</label>
+            {{ form_widget(form.imageFile, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <input type="submit" value="Enregistrer" class="btn btn-success" formnovalidate/>
+
+
+        {{ form_end(form) }}
+    </div>
+
+    <script>
+        const form= document.getElementById('form');
+        const errorElement= document.getElementById('errorElement');
+        var now = new Date();
+        form.addEventListener('submit',(e)=> {
+            let message = [];
+
+
+
+            const year= document.getElementById('evenement_dateDeb_year').value;
+            const month= document.getElementById('evenement_dateDeb_month').value;
+            const day= document.getElementById('evenement_dateDeb_day').value;
+
+            const yearf= document.getElementById('evenement_dateFin_year').value;
+            const monthf= document.getElementById('evenement_dateFin_month').value;
+            const dayf= document.getElementById('evenement_dateFin_day').value;
+
+
+            var date= new Date(year,month,day)
+            var datef= new Date(yearf,monthf,dayf)
+
+
+
+
+            console.log('whyy'+date)
+
+            console.log(date , ' ', now)
+            if((date < now) || (date>datef)){
+                swal("Oops...","Valider votre date ","error" );
+                message.push('Vérifier Votre date')
+            }
+            console.log(message)
+            if(message.length> 0){
+                e.preventDefault();
+                errorElement.innerText = message.join(', ')
+            }
+        })
+    </script>
+{% endblock %}

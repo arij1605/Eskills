@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reponse index{% endblock %}
+
+{% block body %}
+    <h1>Reponse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdReponse</th>
+                <th>Reponse</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reponse in reponses %}
+            <tr>
+                <td>{{ reponse.idReponse }}</td>
+                <td>{{ reponse.reponse }}</td>
+                <td>
+                    <a href="{{ path('reponse_show', {'idReponse': reponse.idReponse}) }}">show</a>
+                    <a href="{{ path('reponse_edit', {'idReponse': reponse.idReponse}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('reponse_new') }}">Create new</a>
+{% endblock %}
